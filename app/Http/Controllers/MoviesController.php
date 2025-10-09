@@ -33,6 +33,16 @@ class MoviesController extends Controller
 
     // Kreira novi film i povezuje ga sa žanrovima
     public function store(Request $request) {
+
+        //VALIDACIJA
+        $request->validate([
+    'title' => 'required|string|max:255',
+    'description' => 'nullable|string',
+    'poster' => 'nullable|url',
+    'release_date' => 'nullable|date',
+    'genres' => 'nullable|array'
+]);
+
         $movie = Movie::create($request->all()); // Kreira film sa svim podacima iz zahteva
 
         // Ako zahtev sadrži žanrove, poveži film sa njima
@@ -47,6 +57,15 @@ class MoviesController extends Controller
 
     // Ažurira postojeći film i njegove žanrove
     public function update(Request $request, $id) {
+
+        $request->validate([
+    'title' => 'required|string|max:255',
+    'description' => 'nullable|string',
+    'poster' => 'nullable|url',
+    'release_date' => 'nullable|date',
+    'genres' => 'nullable|array'
+]);
+
         $movie = Movie::findOrFail($id); // Pronađi film po ID-u
         $movie->update($request->all()); // Ažuriraj sve podatke iz zahteva
 
