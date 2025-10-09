@@ -18,6 +18,10 @@ class MoviesController extends Controller
         $query->orderBy('release_date', $request->sort);
     }
 
+    if ($request->has('search')) {
+    $query->where('title', 'like', '%' . $request->search . '%');
+    }
+
     return $query->paginate(10);
     }
 
