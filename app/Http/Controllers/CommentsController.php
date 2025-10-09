@@ -11,6 +11,9 @@ class CommentsController extends Controller
 }
 
 public function store(Request $request, $movieId) {
+
+    $request->validate(['score' => 'required|integer|min:1|max:5']);
+
     $comment = Comment::create([
         'user_id' => $request->user()->id,
         'movie_id' => $movieId,

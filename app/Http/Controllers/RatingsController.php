@@ -11,6 +11,9 @@ class RatingsController extends Controller
 }
 
 public function store(Request $request, $movieId) {
+
+    $request->validate(['score' => 'required|integer|min:1|max:5']);
+
     $rating = Rating::create([
         'user_id' => $request->user()->id,
         'movie_id' => $movieId,
