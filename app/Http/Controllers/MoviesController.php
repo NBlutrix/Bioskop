@@ -8,7 +8,17 @@ class MoviesController extends Controller
 {
     // Vrati sve filmove sa povezanim žanrovima, ocenama i komentarima
     public function index() {
-        return Movie::with('genres', 'ratings', 'comments')->get();
+        $query = Movie::with('genres', 'ratings', 'comments');
+
+    if ($request->has('genre')) {
+        $query->whereHas('genres', fn($q) => $q->where('name', $request->genre));
+    }
+
+    if ($request->has('sort')) {
+        $query->orderBy('release_date', $request->sort);
+    }
+
+    return $query->paginate(10);
     }
 
     // Vrati jedan film po ID-u sa svim povezanim podacima
