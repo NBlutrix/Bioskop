@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
+
+ protected $fillable = [
+        'name',
+        'tmdb_id',
+    ];
+
     public function movies() { return $this->belongsToMany(Movie::class); }
 }

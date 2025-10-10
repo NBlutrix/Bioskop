@@ -10,7 +10,7 @@ use App\Http\Controllers\TMDBController;
 
 Route::apiResource('movies', MoviesController::class);
 
-Route::get('/import-tmdb', [TMDBController::class, 'import'])->middleware('auth:sanctum');
+
 Route::get('movies/{movie}/ratings', [RatingsController::class, 'index']);
 Route::post('movies/{movie}/ratings', [RatingsController::class, 'store']);
 Route::put('ratings/{id}', [RatingsController::class, 'update']);
@@ -26,6 +26,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function() {
+
+    Route::get('/import-tmdb', [TMDBController::class, 'import']);
     Route::post('movies', [MoviesController::class, 'store']);
     Route::put('movies/{movie}', [MoviesController::class, 'update']);
     Route::delete('movies/{movie}', [MoviesController::class, 'destroy']);
