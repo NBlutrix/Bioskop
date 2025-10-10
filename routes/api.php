@@ -6,9 +6,11 @@ use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TMDBController;
 
 Route::apiResource('movies', MoviesController::class);
 
+Route::get('/import-tmdb', [TMDBController::class, 'import'])->middleware('auth:sanctum');
 Route::get('movies/{movie}/ratings', [RatingsController::class, 'index']);
 Route::post('movies/{movie}/ratings', [RatingsController::class, 'store']);
 Route::put('ratings/{id}', [RatingsController::class, 'update']);
