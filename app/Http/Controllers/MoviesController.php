@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
 
 class MoviesController extends Controller
 {
     // Vrati sve filmove sa povezanim žanrovima, ocenama i komentarima
-    public function index() {
+    public function index(Request $request) {
         $query = Movie::with('genres', 'ratings', 'comments');
 
     if ($request->has('genre')) {

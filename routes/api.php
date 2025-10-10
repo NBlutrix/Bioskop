@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\RatingsController;
+use App\Http\Controllers\CommentsController;
 
 Route::apiResource('movies', MoviesController::class);
 
