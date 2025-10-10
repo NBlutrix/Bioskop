@@ -21,6 +21,11 @@ return [
         'scheme' => 'https',
     ],
 
+    'tmdb' => [
+    'key' => env('TMDB_API_KEY'),
+    'base_url' => env('TMDB_BASE_URL'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
