@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\RatingsController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\AuthController;
 
 Route::apiResource('movies', MoviesController::class);
 
@@ -18,6 +19,9 @@ Route::post('movies/{movie}/comments', [CommentsController::class, 'store']);
 Route::put('comments/{id}', [CommentsController::class, 'update']);
 Route::delete('comments/{id}', [CommentsController::class, 'destroy']);
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('movies', [MoviesController::class, 'store']);
